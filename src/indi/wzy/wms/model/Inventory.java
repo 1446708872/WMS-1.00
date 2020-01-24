@@ -8,6 +8,25 @@ public class Inventory {
 	private String Version;
 	private Integer Amount;
 	
+	public Inventory() {
+		
+	}
+	
+	public String[] getAys() {
+		String[] ays ={ProductID.toString(),User,SynthesisTechnology,Capacity,Version,Amount.toString()};
+		return ays;
+	}
+	
+	public Inventory(Integer productID, String user, String synthesisTechnology, String capacity, String version,
+			Integer amount) {
+		ProductID = productID;
+		User = user;
+		SynthesisTechnology = synthesisTechnology;
+		Capacity = capacity;
+		Version = version;
+		Amount = amount;
+	}
+
 	public Integer getProductID() {
 		return ProductID;
 	}

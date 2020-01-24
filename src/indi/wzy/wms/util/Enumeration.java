@@ -1,4 +1,4 @@
-package indi.wzy.wms.vo;
+package indi.wzy.wms.util;
 
 /**
  * 

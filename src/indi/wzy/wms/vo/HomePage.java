@@ -1,13 +1,20 @@
 package indi.wzy.wms.vo;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-
+import indi.wzy.wms.model.Inventory;
+import indi.wzy.wms.service.ServiceFactory;
+import indi.wzy.wms.util.Enumeration;
 
 /**
  * 
@@ -17,13 +24,6 @@ import javax.swing.table.DefaultTableModel;
  * @version V1.00
  */
 public class HomePage extends JFrame {
-
-	// Virtual data in the table
-	private String[][] item = { { "1", "Mr.Wang", "Total synthesis", "1", "OW-40", "2" },
-			{ "2", "Mr.Wang", "Total synthesis", "1", "OW-40", "2" },
-			{ "3", "Mr.Wang", "Total synthesis", "1", "OW-40", "2" },
-			{ "4", "Mr.Wang", "Total synthesis", "1", "OW-40", "2" },
-			{ "5", "Mr.Wang", "Total synthesis", "1", "OW-40", "2" } };
 
 	// Title content on the main screen.
 	private String INTERFACE_TITLE = "Warehouse Management System";
@@ -62,8 +62,8 @@ public class HomePage extends JFrame {
 		this.setVisible(true);
 	}
 
-	private void InitializationTable() {
-		tableModel = new DefaultTableModel(item,Enumeration.HOME_PAGE_TABLE_TITLE.getData());
+	public void InitializationTable() {
+		tableModel = new DefaultTableModel(ServiceFactory.getInventoryService().getInventorys(), Enumeration.HOME_PAGE_TABLE_TITLE.getData());
 		table = new HomePageTable(tableModel);
 		scrollPane = new JScrollPane(table);
 		this.add(scrollPane, BorderLayout.CENTER);
@@ -80,21 +80,21 @@ public class HomePage extends JFrame {
 				for (String menu : Enumeration.HOME_PAGE_MENU_BAR_MENU.getData()) {
 					menuItems = new JMenuItem(menu);
 					menuItem.add(menuItems);
-					// menuItems.addActionListener(new MainMenuBarListener());
+					menuItems.addActionListener(new MenuBarListener());
 				}
 				break;
 			case "Record":
 				for (String record : Enumeration.HOME_PAGE_MENU_BAR_RECORD.getData()) {
 					menuItems = new JMenuItem(record);
 					menuItem.add(menuItems);
-					// menuItems.addActionListener(new MainMenuBarListener());
+					menuItems.addActionListener(new MenuBarListener());
 				}
 				break;
 			case "Notice":
 				for (String notice : Enumeration.HOME_PAGE_MENU_BAR_NOTICE.getData()) {
 					menuItems = new JMenuItem(notice);
 					menuItem.add(menuItems);
-					// menuItems.addActionListener(new MainMenuBarListener());
+					menuItems.addActionListener(new MenuBarListener());
 				}
 				break;
 			}
@@ -107,15 +107,14 @@ public class HomePage extends JFrame {
 		popupMenu = new JPopupMenu();
 		for (String item : Enumeration.HOME_PAGE_POPUP.getData()) {
 			JMenuItem menuItem = new JMenuItem(item);
-//			 menuItem.addActionListener(new MainPupopMenuListener(this.tableModel,
-//			 table));
+			menuItem.addActionListener(new PupopMenuListener(this.tableModel, table));
 			popupMenu.add(menuItem);
 		}
 		table.addMouseListener((MouseListener) new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (e.getButton() == MouseEvent.BUTTON3)
-					popupMenu.show(HomePage.this, e.getX()+10, e.getY()+75);
+					popupMenu.show(HomePage.this, e.getX() + 10, e.getY() + 75);
 			}
 		});
 	}
@@ -168,5 +167,90 @@ class HomePageTable extends JTable {
 	 */
 	public boolean isCellEditable(int row, int column) {
 		return false;
+	}
+}
+
+/**
+ * 
+ * @ClassName: MenuBarListener
+ * @Description: Click events for all menu bars.
+ * @author: 234
+ * @date: 2020年1月24日 下午1:16:36
+ */
+class MenuBarListener implements ActionListener {
+	/**
+	 * 
+	 * @Title: actionPerformed
+	 * @Description: Implement menu bar events.
+	 * @param: @param e Menu bar behavior.
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
+	public void actionPerformed(ActionEvent e) {
+		switch (e.getActionCommand()) {
+		case "Add":
+			// VisualInterfaceFactory.newVisualInterfaceDataActionJFrame("Add Data");
+			break;
+		case "Exit":
+			System.exit(0);
+			break;
+		case "Open":
+			// VisualInterfaceFactory.getVis ualInterfaceRecordJFrame().setVisible(true);
+			break;
+		case "Appear":
+			/*
+			 * JOptionPane.showMessageDialog(null,
+			 * "If there are any defects in the system ,please contact QQ 1446708872",
+			 * "Matters needing attention",JOptionPane.NO_OPTION);
+			 */
+			break;
+		}
+	}
+}
+
+/**
+ * 
+ * @ClassName: PupopMenuListener
+ * @Description: Right-click the menu click event press.
+ * @author: 234
+ * @date: 2020年1月24日 下午1:38:48
+ */
+class PupopMenuListener implements ActionListener {
+	private DefaultTableModel tableModel;
+	private HomePageTable table;
+
+	public PupopMenuListener(DefaultTableModel tableModel, HomePageTable table) {
+		this.tableModel = tableModel;
+		this.table = table;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		switch (e.getActionCommand()) {
+		case "Modify":
+			if (table.getSelectedRows().length > 1) {
+		
+			}else if (table.getSelectedRows().length == 0) {
+				JOptionPane.showMessageDialog(null, "Please select what you want to modify.", "Waring",
+						JOptionPane.NO_OPTION);
+			}
+			break;
+		case "Add":
+			// VisualInterfaceFactory.newVisualInterfaceDataActionJFrame("Add Data");
+			break;
+		case "Delete":
+			if (table.getSelectedRows().length > 0) {
+				int i = JOptionPane.showConfirmDialog(null, "Are you sure you wang to delete it ?", "Waring!",
+						JOptionPane.YES_NO_OPTION);
+				if (i == 1)
+					break;
+			} else if (table.getSelectedRows().length == 0) {
+				JOptionPane.showMessageDialog(null, "Please select what you want to delete.", "Waring",
+						JOptionPane.NO_OPTION);
+			}
+			break;
+		case "Refresh":
+				PageFactory.getHomePage().InitializationTable();
+			break;
+		}
 	}
 }
