@@ -4,7 +4,7 @@ package indi.wzy.wms.vo;
  * 
  * @Description: Stores the main page string data
  * @author:234
- * @date: 2020年1月23日 下午5:45:18
+ * @date: 2020脛锚1脭脗23脠脮 脧脗脦莽5:45:18
  * @version V1.00
  */
 public enum Enumeration {

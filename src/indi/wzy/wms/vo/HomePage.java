@@ -5,7 +5,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Date;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -64,7 +63,7 @@ public class HomePage extends JFrame {
 	}
 
 	private void InitializationTable() {
-		tableModel = new DefaultTableModel(item, Enumeration.HOME_PAGE_TABLE_TITLE.getData());
+		tableModel = new DefaultTableModel(item,Enumeration.HOME_PAGE_TABLE_TITLE.getData());
 		table = new HomePageTable(tableModel);
 		scrollPane = new JScrollPane(table);
 		this.add(scrollPane, BorderLayout.CENTER);
