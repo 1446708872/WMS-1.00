@@ -12,17 +12,15 @@ import indi.wzy.wms.model.Inventory;
  * @param:
  */
 public interface InventoryService {
+	public String[][] getInventorys(List <Integer> productIDs);
+	
 	public String[][] getInventorys();
 	
-	public Inventory getInventory();
+	public boolean save(Inventory inventory);
 	
-	public boolean save(Inventory invebtory);
+	public boolean updata(List<Inventory> inventorys);
 	
-	public boolean remove(Inventory inventory);
+	public boolean updata(Inventory inventory);
 	
-	public boolean remove(List<Inventory> inventorys);
-	
-	public boolean modify(Inventory inventory);
-	
-	public boolean modify(List<Inventory> inventorys);
+	public boolean remove(List<Integer> inventorys);
 }

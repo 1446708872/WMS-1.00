@@ -2,7 +2,7 @@ package indi.wzy.wms.model;
 
 public class Inventory {
 	private Integer ProductID;
-	private String User;
+	private String Name;
 	private String SynthesisTechnology;
 	private String Capacity;
 	private String Version;
@@ -13,14 +13,14 @@ public class Inventory {
 	}
 	
 	public String[] getAys() {
-		String[] ays ={ProductID.toString(),User,SynthesisTechnology,Capacity,Version,Amount.toString()};
+		String[] ays ={ProductID.toString(),Name,SynthesisTechnology,Capacity,Version,Amount.toString()};
 		return ays;
 	}
 	
-	public Inventory(Integer productID, String user, String synthesisTechnology, String capacity, String version,
+	public Inventory(Integer productID, String name, String synthesisTechnology, String capacity, String version,
 			Integer amount) {
 		ProductID = productID;
-		User = user;
+		Name = name;
 		SynthesisTechnology = synthesisTechnology;
 		Capacity = capacity;
 		Version = version;
@@ -35,12 +35,12 @@ public class Inventory {
 		ProductID = productID;
 	}
 
-	public String getUser() {
-		return User;
+	public String getName() {
+		return Name;
 	}
 
-	public void setUser(String user) {
-		User = user;
+	public void setName(String name) {
+		Name = name;
 	}
 
 	public String getSynthesisTechnology() {
@@ -74,4 +74,12 @@ public class Inventory {
 	public void setAmount(Integer amount) {
 		Amount = amount;
 	}
+
+	@Override
+	public String toString() {
+		return "Inventory [ProductID=" + ProductID + ", Name=" + Name + ", SynthesisTechnology=" + SynthesisTechnology
+				+ ", Capacity=" + Capacity + ", Version=" + Version + ", Amount=" + Amount + "]";
+	}
+	
+	
 }

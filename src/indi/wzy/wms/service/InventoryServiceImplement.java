@@ -15,46 +15,83 @@ import indi.wzy.wms.model.Inventory;
  */
 public class InventoryServiceImplement  implements InventoryService{
 
+	/**
+	 * 
+	 * @Title: getInventorys
+	 * @Description: Return inventory information.
+	 * @param: @return
+	 * @see indi.wzy.wms.service.InventoryService#getInventorys()
+	 */
 	@Override
 	public String[][] getInventorys() {
 		// TODO Auto-generated method stub
 		return DaoFactory.getInventoryDao().getInventorys(null);
 	}
 
+	/**
+	 * 
+	 * @Title: save
+	 * @Description: Save inventory information.
+	 * @param: @param inventory
+	 * @param: @return
+	 * @see indi.wzy.wms.service.InventoryService#save(indi.wzy.wms.model.Inventory)
+	 */
 	@Override
-	public Inventory getInventory() {
+	public boolean save(Inventory inventory) {
 		// TODO Auto-generated method stub
-		return null;
+		return DaoFactory.getInventoryDao().save(null, inventory);
 	}
 
+	/**
+	 * 
+	 * @Title: remove
+	 * @Description: Remove inventory information.
+	 * @param: @param inventorys
+	 * @param: @return
+	 * @see indi.wzy.wms.service.InventoryService#remove(java.util.List)
+	 */
 	@Override
-	public boolean save(Inventory invebtory) {
+	public boolean remove(List<Integer> inventorys) {
 		// TODO Auto-generated method stub
-		return false;
+		return DaoFactory.getInventoryDao().remove(null, inventorys);
 	}
 
-	@Override
-	public boolean remove(Inventory inventory) {
+	/**
+	 * 
+	 * @Title: getInventorys
+	 * @Description: return inventory information by product id.
+	 * @param: @param productIDs
+	 * @param: @return
+	 * @see indi.wzy.wms.service.InventoryService#getInventorys(java.util.List)
+	 */
+	public String[][] getInventorys(List<Integer> productIDs) {
 		// TODO Auto-generated method stub
-		return false;
+		return DaoFactory.getInventoryDao().getInventorys(null, productIDs);
 	}
 
-	@Override
-	public boolean remove(List<Inventory> inventorys) {
+	/**
+	 * 
+	 * @Title: update
+	 * @Description: 
+	 * @param: @param inventorys
+	 * @param: @return
+	 * @see indi.wzy.wms.service.InventoryService#updata(java.util.List)
+	 */
+	public boolean updata(List<Inventory> inventorys) {
 		// TODO Auto-generated method stub
-		return false;
+		return DaoFactory.getInventoryDao().updata(null, inventorys);
 	}
 
-	@Override
-	public boolean modify(Inventory inventory) {
+	/**
+	 * 
+	 * @Title: update
+	 * @Description: 
+	 * @param: @param inventorys
+	 * @param: @return
+	 * @see indi.wzy.wms.service.InventoryService#updata(indi.wzy.wms.model.Inventory)
+	 */
+	public boolean updata(Inventory inventory) {
 		// TODO Auto-generated method stub
-		return false;
+		return DaoFactory.getInventoryDao().updata(null, inventory);
 	}
-
-	@Override
-	public boolean modify(List<Inventory> inventorys) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	
 }

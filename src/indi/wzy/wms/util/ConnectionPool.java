@@ -49,8 +49,8 @@ public class ConnectionPool implements InterfaceConnectionPool {
 	}
 	
 	// Free thread set and active thread set.
-	private List<Connection> freeConnection = new CopyOnWriteArrayList();
-	private List<Connection> activeConnecion = new CopyOnWriteArrayList();
+	private List<Connection> freeConnection = new CopyOnWriteArrayList<Connection>();
+	private List<Connection> activeConnecion = new CopyOnWriteArrayList<Connection>();
 
 	// The atomic class marks the number of connections stored in the free pool
 	private AtomicInteger atomicInteger;

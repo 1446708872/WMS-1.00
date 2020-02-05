@@ -8,14 +8,19 @@ package indi.wzy.wms.util;
  * @version V1.00
  */
 public enum Enumeration {
-	HOME_PAGE_TABLE_TITLE("Product ID","User","Synthesis technology","Capacity(liter)","Version","Amount"),
+	HOME_PAGE_TABLE_TITLE("Product ID","Name","Synthesis technology","Capacity(liter)","Version","Amount"),
+	ADD_DATA_PAGE_TABLE_TITLE("Name","Synthesis technology","Capacity(liter)","Version","Amount"),
 	
-	HOME_PAGE_MENU_BAR("Menu","Record","Notice"),
+	HOME_PAGE_MENU_BAR("Menu","Record","Action","Notice"),
 	HOME_PAGE_MENU_BAR_MENU("Add","Exit"),
 	HOME_PAGE_MENU_BAR_RECORD("Open"),
+	HOME_PAGE_MENU_BAR_ACTION("Import","Export"),
 	HOME_PAGE_MENU_BAR_NOTICE("Appear"),
 	
-	HOME_PAGE_POPUP("Modify","Add","Delete","Refresh");
+	DATA_ACTION_MENU_BAR("Menu"),
+	DATA_ACTION_MENU("Save","Cancel"),
+	
+	HOME_PAGE_POPUP("Taken out","Deposited","Modify","Add","Delete","Refresh");
 	
 	private String[] datas;
 	

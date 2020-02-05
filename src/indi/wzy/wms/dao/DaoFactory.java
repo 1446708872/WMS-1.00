@@ -29,9 +29,11 @@ public class DaoFactory {
 						public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 							// TODO Auto-generated method stub
 							Connection connection = inventoryProxy.before();
+							connection.setAutoCommit(false);
 							args[0]=connection;
 							Object obj = method.invoke(inventory, args);
 							inventoryProxy.after(connection);
+							connection.commit();
 							return obj;
 						}
 					});
